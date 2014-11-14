@@ -1,0 +1,479 @@
+@charset "utf-8";
+* {
+margin: 0;
+padding: 0;
+}
+	
+@font-face {
+	font-family : "century-gothic";
+    font-style: normal;
+    font-weight: normal;
+    src: url('../fonts/century-gothic.woff') format("woff"), url('../fonts/century-gothic.ttf') format("truetype");
+}
+
+@font-face {
+    font-family:"FutuLt__";
+    font-style: normal;
+    font-weight: normal;
+    src: url('../fonts/FutuLt__.woff') format("woff"), url('../fonts/FutuLt__.ttf') format("truetype");
+}
+
+@font-face
+{
+	font-family : "MyriadPro-Regular";
+	font-style: normal;
+    font-weight: normal;
+	src: url('../fonts/MyriadPro-Regular.woff') format("woff"), url('../fonts/MyriadPro-Regular.otf') format("truetype");
+}
+
+body{
+	text-align: center;	
+}
+
+a:focus{
+	outline:0;
+	}
+
+a.textomenu:link, a.textomenu:hover, a.textomenu:active, a.textomenu:visited
+{
+	color:#666;
+	font-family : "century-gothic";
+	font-size:12pt;
+	text-decoration:none;
+}
+
+a.textomenu:hover
+{
+	color:#666;
+	font-family : "century-gothic";
+	font-size:12pt;
+	font-weight:bold;
+	text-decoration:none;
+}
+
+#head
+{
+	height:75px;
+	width:1024px;
+	background-color:#FFFFFF;
+	margin-top:0px;
+	z-index:3;
+	color:#666666;
+	font-family : "century-gothic";
+	font-size:16pt;
+	border-bottom:0px solid #999;
+	margin: auto auto auto auto;
+}
+
+#banner{
+    width:1024px;
+    height:425px;
+    margin:0 auto;
+}
+
+#contenido1
+{
+	height: 425px;
+	width: 1024px;
+	clear:both;
+	text-align:center;	
+	position:relative; 
+	z-index:2;
+	border-bottom:1px solid #999;
+	margin: auto auto auto auto;
+}
+
+#contenido-tab
+{
+	height:70px;
+	width:1024px;
+	clear:both;
+	text-align:center;	
+	position:relative; 
+	z-index:2;
+	background-color:#FFF;
+	border-bottom:1px solid #999;
+	margin: auto auto auto auto;
+}
+
+#contenido-minisites
+{
+	width:1024px;
+	clear:both;
+	text-align:center;	
+	position:relative; 
+	z-index:2;
+	background-color:#FFF;
+	border-bottom:1px solid #999;
+	margin: auto auto auto auto;
+}
+
+
+#contenido-tab1, #contenido-tab2, #contenido-tab3, #contenido-tab4
+{
+	height:70px;
+	width:256px;
+	text-align:center;	
+	position:relative; 
+	z-index:2;
+	float:left;
+}
+
+#contenido2
+{
+	height:220px;
+	width:1024px;
+	clear:both;
+	text-align:center;	
+	position:relative; 
+	z-index:2;
+	background-color:#FFF;
+	border-bottom:1px solid #999;
+	margin-top:15px;
+	margin: auto auto auto auto;
+}
+
+.cajas-contenido2
+{
+	height:200px;
+	width:256px;
+	float:left;
+	text-align:left;	
+	position:relative; 
+	z-index:2;
+	background-color:#FFF;
+}
+
+.cajas-contenido3
+{
+	height:300px;
+	width:280px;
+	float:left;
+	text-align:left;	
+	position:relative; 
+	z-index:2;
+	background-color:#FFF;
+	border-bottom:1px solid #999
+}
+
+#contenido3
+{
+	height:100px;
+	width:1024px;
+	text-align:center;	
+	position:relative; 
+	z-index:2;
+	background-color:#FFF;
+	border-bottom:1px solid #999;
+	margin: auto auto auto auto;
+}
+
+#contenido4
+{
+	height:320px;
+	width:100%;
+	clear:both;
+	text-align:center;	
+	position:relative; 
+	z-index:2;
+	background-color:#FFF;
+	margin-top:25px;
+}
+
+.cajas-contenido4
+{
+	height:300px;
+	width:280px;
+	float:left;
+	text-align:left;	
+	position:relative; 
+	z-index:2;
+	background-color:#FFF;
+}
+
+.cajas-contenido4-imagen
+{
+	height:140px;
+	vertical-align:top;
+	padding-left:10px;
+	padding-right:10px;
+}
+
+#redes{
+	height:150px; 
+	width:500px; 
+	margin:0 auto;
+}
+
+.cajas-contenido2-titulo
+{
+	font-family : "MyriadPro-Regular";
+	font-size:18pt;
+	color:#9d9d9d;
+	text-align:center;
+	height:30px;
+	vertical-align:middle;
+}
+.cajas-contenido2-titulo2
+{
+	font-family : "century-gothic";
+	font-size:16pt;
+	color:#cc324c;
+	text-align:center;
+	height:40px;
+	vertical-align:top;
+}
+.cajas-contenido2-texto1
+{
+	font-family : "MyriadPro-Regular";
+	font-size:9pt;
+	color:#cc324c;
+	text-align:justify;
+	height:100px;
+	vertical-align:top;
+	padding-left:10px;
+	padding-right:10px;
+}
+.cajas-contenido2-texto2
+{
+	font-family : "MyriadPro-Regular";
+	font-size:9pt;
+	color:#6c6c6c;
+	text-align:justify;
+	height:100px;
+	vertical-align:top;
+	padding-left:10px;
+	padding-right:10px;
+	margin-top:5px;
+}
+.cajas-contenido2-texto3
+{
+	font-family : "MyriadPro-Regular";
+	font-size:9pt;
+	color:#6c6c6c;
+	text-align:justify;
+	height:50px;
+	vertical-align:top;
+	padding-left:10px;
+	padding-right:10px;
+}
+
+a.enlace:link, a.enlace:active, a.enlace:visited
+{
+	color:#CC324C;	
+	font-family : "MyriadPro-Regular";
+	font-size:11pt;
+	font-weight:bold;
+	text-decoration:underline;
+	margin-left:10px;
+}
+
+a.enlace:hover
+{
+	color:#CC324C;
+	font-family : "MyriadPro-Regular";
+	font-size:11pt;
+	font-weight:bold;
+	text-decoration:underline;
+	margin-left:10px;
+}
+
+#footer
+{
+	width:100%;
+	height:150px;
+	background-color:#4C4B4B;	
+}
+
+#footer-tiara1
+{
+	width:100%;
+	height:10px;
+	background-color:#282828;	
+}
+
+#footer-texto
+{
+	width:1024px;
+	height:130px;
+	margin:0 auto;
+}
+
+#footer-tiara2
+{
+	width:100%;
+	height:10px;
+	background-color:#c41230;	
+}
+
+.footer-seccion
+{
+	width:250px;
+	height:130px;
+	position:relative;
+	float:left;
+	margin-top:-70px;
+}
+
+.cajas-footer-texto1
+{
+	font-family : "MyriadPro-Regular";
+	font-size:9pt;
+	color:#FFFFFF;
+	text-align:center;
+}
+
+.cajas-footer-texto2
+{
+	font-family : "MyriadPro-Regular";
+	font-size:14pt;
+	color:#8f8f8f;
+	text-align:center;
+}
+
+.cajas-footer-texto3
+{
+	font-family : "MyriadPro-Regular";
+	font-size:12pt;
+	color:#8f8f8f;
+	text-align:left;
+}
+
+.cajas-footer-texto4
+{
+	font-family : "MyriadPro-Regular";
+	font-size:16pt;
+	color:#8f8f8f;
+	text-align:left;
+	font-weight:bold;
+}
+
+.input-footer-texto1
+{
+	font-family : "MyriadPro-Regular";
+	font-size:10pt;
+	color:#8f8f8f;
+	text-align:left;
+	background-color:#4C4B4B;
+	border-top:1px solid #999;
+	border-bottom:1px solid #999;
+	border-left:1px solid #999;
+	border-right:1px solid #999;
+}
+
+.input-texto1
+{
+	font-family : "MyriadPro-Regular";
+	font-size:10pt;
+	color:#8f8f8f;
+	text-align:left;
+	background-color:#FFF;
+	border-top:1px solid #999;
+	border-bottom:1px solid #999;
+	border-left:1px solid #999;
+	border-right:1px solid #999;
+}
+
+a.enlace2:link, a.enlace2:active, a.enlace2:visited, a.enlace2:hover
+{
+	color:#FFFFFF;	
+	font-family : "MyriadPro-Regular";
+	font-size:10pt;
+	font-weight:bold;
+	text-decoration:underline;
+	margin-right:0px;
+}
+
+a.enlace3:link, a.enlace3:active, a.enlace3:visited, a.enlace3:hover
+{
+	color:#8f8f8f;	
+	font-family : "MyriadPro-Regular";
+	font-size:14pt;
+	text-decoration:underline;
+	margin-right:0px;
+}
+
+/* Dock */
+#description {border-top:10px solid #333333; padding:0;}
+#descScroll {max-height:250px; overflow-x:hidden; overflow-y:auto;}
+#descInner {padding:5px 0;}
+/*position and hide the menu initially...*/
+#page {position:relative; width:100%; height:100px; overflow:hidden;}
+#menu {position:absolute; top:30px; left:0; width:100%; display:none;}
+/*dock styling...*/
+/*...centre the dock...*/
+#menu div.jqDockWrap {margin:0 auto;}
+/*...set the cursor...*/
+#menu div.jqDock {cursor:pointer;}
+#menu img {padding:0 10px;}
+/*label styling...*/
+div.jqDockLabel {font-weight:bold; font-family:Arial, Helvetica, sans-serif; font-style:italic; white-space:nowrap; color:#999; cursor:pointer;}
+
+#contenido-producto1
+{
+	height:100px;
+	width:1024px;
+	clear:both;
+	text-align:center;	
+	position:relative; 
+	z-index:2;
+	background-color:#FFF;
+	border-bottom:1px solid #999;
+	margin: auto auto auto auto;
+}
+
+#contenido-producto1-2, #contenido-producto1-3
+{
+	height:100px;
+	width:360px;
+	text-align:center;	
+	position:relative; 
+	z-index:2;
+	float:left;
+}
+
+#contenido-producto1-1
+{
+	height:100px;
+	width:304px;
+	text-align:center;	
+	position:relative; 
+	z-index:2;
+	float:left;
+}
+
+.texto1
+{
+	font-family : "MyriadPro-Regular";
+	font-size:13pt;
+	color:#8f8f8f;
+	text-align:left;
+}
+
+.texto2
+{
+	font-family : "MyriadPro-Regular";
+	font-size:12pt;
+	color:#8f8f8f;
+	text-align:right;
+}
+
+.texto3
+{
+	font-family : "MyriadPro-Regular";
+	font-size:12pt;
+	color:#8f8f8f;
+	text-align:justify;
+}
+.texto3Rojo
+{
+	font-family : "century-gothic";
+	font-size:12pt;
+	color:#C41230;
+}
+.texto3Magenta
+{
+	font-family : "century-gothic";
+	font-size:12pt;
+	color:#0585C4;
+}

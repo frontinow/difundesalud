@@ -1,0 +1,283 @@
+/* Grid-View */
+
+.table-gridview thead tr th {
+    background: linear-gradient(to bottom, #F8F8F8 0px, #ECECEC 100%) repeat-x scroll 0% 0% #F2F2F2;
+    color: #000;
+    border-bottom: 2px solid #008cba;
+}
+
+.table-gridview thead tr th a {
+    color: #000;
+}
+
+.link-column {    
+    width: 50px;
+    vertical-align: middle;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    align: center;
+}
+
+.grid-view-loading
+{
+    background:url(gridviewloading.gif) no-repeat;
+}
+.grid-view a.asc
+{
+    background:url(up.gif) right center no-repeat;
+    padding-right: 10px;
+}
+
+.grid-view a.desc
+{
+    background:url(down.gif) right center no-repeat;
+    padding-right: 10px;
+}
+.summary {
+    width: 100%;
+    text-align: right;
+}
+
+/* Form */
+
+.required span {
+    color: #E20F0F;
+}
+.errorMessage {
+    color: #E20F0F;
+}
+
+
+/* CSS PAGINACION GRIDVIEW */
+
+.gridview-pagination {
+    height: 36px;
+    margin: 18px 0;
+    width: 100%;
+}
+.gridview-pagination ul {
+    display: inline-block;
+    display: inline;
+    zoom: 1;
+    margin-left: 0;
+    margin-bottom: 0;
+    width: 100%;
+    float: left;
+}
+.gridview-pagination li {
+    display: inline;
+}
+.gridview-pagination a,
+.gridview-pagination span {
+    float: left;
+    padding: 0 14px;
+    line-height: 26px;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-left-width: 0;
+}
+.gridview-pagination a:hover,
+.gridview-pagination .active a,
+.gridview-pagination .active span {
+    background-color: #f5f5f5;
+}
+.gridview-pagination .selected a,
+.gridview-pagination .selected span {
+    color: #5d6368;
+    cursor: default;
+    background-color: #EFEFEF;
+}
+.gridview-pagination .hidden span,
+.gridview-pagination .hidden a,
+.gridview-pagination .hidden a:hover {
+    color: #999;
+    background-color: transparent;
+    cursor: default;
+}
+.gridview-pagination li:first-child a,
+.gridview-pagination li:first-child span {
+    border-left-width: 1px;
+    -webkit-border-radius: 3px 0 0 3px;
+    -moz-border-radius: 3px 0 0 3px;
+    border-radius: 3px 0 0 3px;
+}
+.gridview-pagination li:last-child a,
+.gridview-pagination li:last-child span {
+    -webkit-border-radius: 0 3px 3px 0;
+    -moz-border-radius: 0 3px 3px 0;
+    border-radius: 0 3px 3px 0;
+}
+.gridview-pagination-centered ul {
+    text-align: center;
+}
+.gridview-pagination-right ul {
+    text-align: right;
+}
+/*
+
+.gridview-pagination .yiiPager li a {
+
+    background-color: #008cba;
+    color: #000;
+    background-image: linear-gradient(to bottom, #FFF, #E6E6E6);
+}
+
+.gridview-pagination .yiiPager .hidden a {
+    background-color: #f5f5f5!important;
+    color: #000;
+}
+.gridview-pagination .yiiPager .selected a {
+    background-color: #f5f5f5!important;
+    color: #000;
+}*/
+
+
+/* FORM */
+
+.required span {
+    color: #E20F0F;
+}
+.errorMessage {
+    color: #E20F0F;
+}
+
+
+/* Size for Form, Button and Elements UI */
+
+.size-xxs {
+    width: 50px!important;
+}
+
+.size-xs {
+    width: 70px!important;
+}
+
+.size-s {
+    width: 90px!important;
+}
+
+.size-m {
+    width: 150px!important;
+}
+
+.size-l {
+    width: 300px!important;
+}
+
+.size-xl {
+    width: 400px!important;
+}
+
+.size-xxl {
+    width: 500px!important;
+}
+
+.size-xxxl {
+    width: 600px!important;
+}
+
+
+.wordwrap {
+    word-wrap: break-word;
+    display: inline-block;
+    max-width: 800px;
+}
+
+
+/* Navbar admin */
+/* Panel Top de Administracion del GridView */
+.navbar-tool .tool-title {
+    float: left;
+    position: relative;
+    margin-top: 4px;
+}
+
+.navbar-tool .tool-button {
+    float: right;
+    position: relative;
+    margin-top: 4px;
+}
+
+.navbar-tool .tool-menu {
+     float: right;
+    position: relative;
+    margin-top: 4px;
+}
+.navbar-tool .tool-pagesize {
+    float: right;
+    position: relative;
+    margin-top: 4px;
+    margin-left: 5px;
+}
+.pagesize-select {
+    position: relative;
+    float: right;    
+    display: block;
+}
+
+
+/* Panel */
+/* CSS zii.widgets.CMenu  */
+
+.cmenuhorizontal {    
+    list-style: none;
+    width: auto;
+}
+
+.cmenuhorizontal li {
+    float: left;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 2px;
+    margin-top: 2px;
+}   
+
+
+
+@media (min-width: 768px) and (max-width: 992px) {
+    .container {
+        width: 100%!important;
+    } 
+}
+
+
+@media (min-width: 992px) {
+    .container {
+      /*  width: 100%!important;*/
+    } 
+    
+}
+
+@media (min-width: 600px) {
+ .wd-xl-form {
+        width: 50%;        
+        max-width: 500px;
+    }
+}
+.navbar {
+    //border: 1px solid #5CB7CE;
+}
+  .wd-xl {
+        width: 300px;
+    }
+    .block-center {
+        margin: 0px auto;
+    }
+    .mt-xl {
+        margin-top: 10% !important;
+    }
+    
+    .wd-xl-form {
+        width: 100%;        
+    }
+    
+ 
+    
+    .loading {
+        width: 100px; 
+        height: 30px;
+        float: right;
+       
+    }

@@ -1,0 +1,66 @@
+.titulos {
+    color: #666;
+    text-align: center;
+}
+.titulos_aplication {
+    color: #00CCFF;
+    text-align: left;
+    
+}
+.titulos_aplication_sub {
+    color: #00CCFF;
+    text-align: left;
+    
+    
+}
+.socialmedia {
+    width: 12%;
+    margin: 3px;
+    float: left;
+}
+
+body {
+	background-image: url(../images/fondo.jpg);
+	background-repeat: repeat-x;
+}
+
+.menumain {
+
+    list-style: none;
+    list-style-type: none; 
+    float: right;
+    margin-top: 20px;
+}
+
+.menumain li {
+
+    margin-right: 20px;
+    display: inline;
+
+}
+
+.menumain li a {
+
+color: #666;
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+    .container {
+        width: 100%!important;
+    } 
+}
+
+
+@media (min-width: 992px) {
+    .container {
+        width: 1024px!important;
+    } 
+    
+}
+
+@media (min-width: 600px) {
+ .wd-xl-form {
+        width: 50%;        
+        max-width: 500px;
+    }
+}

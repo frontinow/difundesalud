@@ -1,0 +1,446 @@
+<?php
+
+class EventsController extends Controller
+{
+	/**
+	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
+	 * using two-column layout. See 'protected/views/layouts/column2.php'.
+	 */
+	public $layout='//layouts/column2';
+
+	/**
+	 * @return array action filters
+	 */
+	public function filters()
+	{
+		return array(
+			'accessControl', // perform access control for CRUD operations
+			'postOnly + delete', // we only allow deletion via POST request
+		);
+	}
+
+	/**
+	 * Specifies the access control rules.
+	 * This method is used by the 'accessControl' filter.
+	 * @return array access control rules
+	 */
+	public function accessRules()
+	{
+		return array(
+			array('allow', /* Acciones Permitidas*/
+				'actions'=>array('index','view','create','update','admin','delete', 'listmunicipalities', 'listparishes','diasadd','miseventos'),
+				'users'=>array('*'),
+			),			
+			array('deny',
+				'users'=>array('*'),
+			),
+		);
+	}
+        
+         public $modulo = "";
+
+	/**
+	 * 
+	 * 
+	 */
+	public function actionView($id)
+	{
+         if (Yii::app()->authRBAC->checkAccess($this->modulo . '_view')) {
+		$this->render('view',array(
+			'model'=>$this->loadModel($id),
+		));
+                    }
+                  else {
+            throw new CHttpException(403, Yii::app()->params['ErrorAccesoDenegado']);
+        }
+	}
+
+	/**
+	 * Creates a new model.
+	 * If creation is successful, the browser will be redirected to the 'view' page.
+	 */
+	
+        public function actionCreate()
+	{
+		
+        
+        if (Yii::app()->authRBAC->checkAccess($this->modulo . '_create')) {
+
+        	$transaction = Yii::app()->db->beginTransaction();
+        	$guardado = FALSE;
+            
+                $user_id = Yii::app()->user->id;
+                $promotor = Promotor::model()->find("user_id = '$user_id'");            
+            
+		$model= new Events;
+		$days[1] = new Days;		
+		//$DaysServices[1] = new DaysServices;
+
+		if(isset($_POST['Events']))
+		{
+                       
+			$model->attributes=@$_POST['Events'];                        
+			
+			$model->promotor_id = $promotor->id;
+                        
+                        $flayer = CUploadedFile::getInstance($model, "flayer");
+                        if($flayer){
+                            $extension = end(explode(".",$flayer->name));
+                            $name = $model->name;
+                            $flayer->saveAs(Yii::getPathOfAlias("webroot")."/uploads/flayer/".$name.".".$extension);
+                            $model->flayer = $name.".".$extension;
+                        }
+
+
+			if($model->save()){
+				$guardado = TRUE;
+				                           
+                             
+                                } else {
+                                $guardado = FALSE;	
+                                }
+
+
+                                $j = 1;				
+				foreach ($_POST['Days'] as $valdays) {
+					$days[$j] = new Days;
+					$days[$j]->attributes = $valdays;
+					$days[$j]->event_id = $model->id;
+					
+					if ($days[$j]->validate()) {
+                            if ($days[$j]->save()) {
+                                
+                            } else {
+                        	$guardado = FALSE;
+                        }
+                        } else {
+                        	$guardado = FALSE;
+                        }
+                        $j++;
+				} 
+		}
+
+		if($guardado){
+			$transaction->commit();
+			$this->redirect(array('view','id'=>$model->id));
+		}
+
+
+		$this->render('create',array(
+			'model'=>$model,
+            'days'=>$days,
+                       
+		));
+                
+                      }
+                  else {
+            throw new CHttpException(403, Yii::app()->params['ErrorAccesoDenegado']);
+        }
+	}
+        public function actionCreate2()
+	{
+		
+        
+        if (Yii::app()->authRBAC->checkAccess($this->modulo . '_create')) {
+            
+                $user_id = Yii::app()->user->id;
+                $promotor = Promotor::model()->find("user_id = '$user_id'");
+            
+            
+		$model= new Events;
+		$days = new Days;
+		$Services = new Services;
+		$DaysServices = new DaysServices;
+		$Promotor = new Users;
+
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		if(isset($_POST['Events']))
+		{
+                       
+			$model->attributes=$_POST['Events'];                        
+			$days->attributes=$_POST['Days'];                        
+			//$DaysServices->attributes=$_POST['DaysServices'];                        
+                        $model->promotor_id = $promotor->id;
+                        
+                        $flayer = CUploadedFile::getInstance($model, "flayer");
+                        if($flayer){
+                            $extension = end(explode(".",$flayer->name));
+                            $name = $model->name;
+                            $flayer->saveAs(Yii::getPathOfAlias("webroot")."/uploads/flayer/".$name.".".$extension);
+                            $model->flayer = $name.".".$extension;
+                        }
+			if($model->save()){
+                             
+                                /* guardar DIAS */ 
+                                $days->event_id = $model->id;
+                                if($days->save()){
+                                     /*guarda en la tabla dayserviecs*/                                      
+                                        $DaysServices->day_id = $days->id;
+                                        $DaysServices->service_id = $model->id;
+                                        $DaysServices->active = '1';
+                                        $DaysServices->save();
+                                     /*guarda en la tabla dayserviecs*/
+                                }
+                                /* guardar DIAS */ 
+                               
+				$this->redirect(array('view','id'=>$model->id));
+                                }
+		}
+
+		$this->render('create',array(
+			'model'=>$model,
+                        'days'=>$days,
+                        'DaysServices'=>$DaysServices,
+                        'Services'=>$Services,
+                        'Promotor'=>$Promotor,
+		));
+                
+                      }
+                  else {
+            throw new CHttpException(403, Yii::app()->params['ErrorAccesoDenegado']);
+        }
+	}
+
+	/**
+	 * Updates a particular model.
+	 * If update is successful, the browser will be redirected to the 'view' page.
+	 * @param integer $id the ID of the model to be updated
+	 */
+	public function actionUpdate($id)
+	{
+        
+         if (Yii::app()->authRBAC->checkAccess($this->modulo . '_update')) {
+        
+		$model=$this->loadModel($id);
+                $days =  Days::model()->find("event_id = '$id'");
+//                $Services =  DaysServices::model()->find("day_id = '$days->id'");
+
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		if(isset($_POST['Events']))
+		{
+			$model->attributes=$_POST['Events'];			
+			$days->attributes=$_POST['Days'];	
+                        
+                        /*se actualiza el Flyer*/
+                        if(CUploadedFile::getInstance($model,'flayer')){
+                               $flayer = CUploadedFile::getInstance($model, "flayer");
+                               $extension = end(explode(".",$flayer->name));
+                               $name = $model->name;
+                               $flayer->saveAs(Yii::getPathOfAlias("webroot")."/uploads/flayer/".$name.".".$extension);
+                               $model->flayer = $name.".".$extension;
+                        }
+                        
+			if($model->save()){
+     
+                                /* guardar DIAS */ 
+                                $days->event_id = $model->id;
+                                $days->save();                              
+				$this->redirect(array('view','id'=>$model->id));
+		}
+                }
+
+		$this->render('update',array(
+			'model'=>$model,
+                        'days'=>$days
+                    
+                        
+		));
+                
+                  }
+                  else {
+            throw new CHttpException(403, Yii::app()->params['ErrorAccesoDenegado']);
+        }
+	}
+
+	/**
+	 * Deletes a particular model.
+	 * If deletion is successful, the browser will be redirected to the 'admin' page.
+	 * @param integer $id the ID of the model to be deleted
+	 */
+	public function actionDelete($id)
+	{
+        
+         if (Yii::app()->authRBAC->checkAccess($this->modulo . '_delete')) {
+		$this->loadModel($id)->delete();
+
+		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+		if(!isset($_GET['ajax'])){
+			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+                        }
+                        
+                                }
+                  else {
+            throw new CHttpException(403, Yii::app()->params['ErrorAccesoDenegado']);
+        }
+	}
+
+	/**
+	 * Lists all models.
+	 */
+	public function actionIndex()
+	{
+        
+          if (Yii::app()->authRBAC->checkAccess($this->modulo . '_index')) {
+		$model=new Events('search');
+		$model->unsetAttributes();  // clear any default values
+		if(isset($_GET['Events'])){
+			$model->attributes=$_GET['Events'];
+                        }
+		$this->render('index',array(
+			'model'=>$model,
+		));
+                 }
+                  else {
+            throw new CHttpException(403, Yii::app()->params['ErrorAccesoDenegado']);
+        }
+	}
+
+	/**
+	 * Manages all models.
+	 */
+	public function actionAdmin()
+	{       
+                    if (Yii::app()->authRBAC->checkAccess($this->modulo . '_admin')) {
+                $dataProvider=new CActiveDataProvider('Events');
+		$this->render('admin',array(
+			'dataProvider'=>$dataProvider,
+		));
+                       }
+                  else {
+            throw new CHttpException(403, Yii::app()->params['ErrorAccesoDenegado']);
+        }
+	}
+
+	/**
+	 * Returns the data model based on the primary key given in the GET variable.
+	 * If the data model is not found, an HTTP exception will be raised.
+	 * @param integer $id the ID of the model to be loaded
+	 * @return Events the loaded model
+	 * @throws CHttpException
+	 */
+	public function loadModel($id)
+	{
+		$model=Events::model()->find(array('condition'=>'id = :id','params'=>array(':id'=>$id)));
+		if($model===null)
+			throw new CHttpException(404,'The requested page does not exist.');
+		return $model;
+	}
+
+	/**
+	 * Performs the AJAX validation.
+	 * @param Events $model the model to be validated
+	 */
+	protected function performAjaxValidation($model)
+	{
+		if(isset($_POST['ajax']) && $_POST['ajax']==='events-form')
+		{
+			echo CActiveForm::validate($model);
+			Yii::app()->end();
+		}
+	}
+
+         public function actionListmunicipalities() {
+
+        if (isset($_POST['Events']['state_id'])) {
+
+            if ($_POST['Events']['state_id'] != NULL) {
+
+                $id = $_POST['Events']['state_id'];
+
+                $consulta = Municipalities::getListMunicipalities($id);
+
+                echo CHtml::tag('option', array('value' => ''), 'Seleccione', true);
+                foreach ($consulta as $value => $nombre) {
+                    echo CHtml::tag('option', array('value' => $value), CHtml::encode($nombre), true);
+                }
+            }
+        }
+    }
+
+    public function actionListparishes() {
+
+        if (isset($_POST['Events']['municipality_id'])) {
+
+            if ($_POST['Events']['municipality_id'] != NULL) {
+
+                $id = $_POST['Events']['municipality_id'];
+
+                $consulta = Parishes::getListParishes($id);
+
+                echo CHtml::tag('option', array('value' => ''), 'Seleccione', true);
+                foreach ($consulta as $value => $nombre) {
+                    echo CHtml::tag('option', array('value' => $value), CHtml::encode($nombre), true);
+                }
+            }
+        }
+    }
+
+
+
+    public function actionDiasadd() {
+
+
+        if (isset($_POST['Days'])) {
+
+            $i = 1;
+
+            $form = new CActiveForm();
+
+            foreach ($_POST['Days'] as $a) {
+
+                $lista[$i] = new Days;
+                $i++;
+            }
+
+            $j = 1;
+            foreach ($_POST['Days'] as $a) {
+
+
+                $lista[$j]->attributes = $a;
+
+                $this->renderPartial('_formday', array(
+                    'days' => $lista,
+                    'i' => $j,
+                    'form' => $form,
+                        ), false, true);
+                $j++;
+            }
+            $lista[$i++] = new Days;
+            $this->renderPartial('_formday', array(
+                'days' => $lista,
+                'i' => $j++,
+                'form' => $form,
+                    ), false, true);
+
+           
+        }
+    }
+
+
+    public function actionMiseventos(){
+        
+        
+       $model=new Events('search');
+		$model->unsetAttributes();  // clear any default values
+		if(isset($_GET['Events'])){
+			$model->attributes=$_GET['Events'];
+                        }
+                 $user_id = Yii::app()->user->id;
+                $promotor = Promotor::model()->find("user_id = '$user_id'"); 
+                
+                $model->promotor_id = $promotor->id;
+                        
+		$this->render('miseventos',array(
+			'model'=>$model,
+		)); 
+        
+        
+    }
+
+        
+        
+                }
